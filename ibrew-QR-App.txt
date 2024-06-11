@@ -1,0 +1,124 @@
+06.06.24
+
+1. How do i generate a QR code for multiple values like the attached one? When i read the code thru a app or a scanner, i should able to get the information.
+2. Give a streamlit web page to enter these values thru a input field, display and download the generated QR code? Name this as "QR Code Generator"
+3. I want the user to enter the QR code values. That is, all these values to be entered by the user
+4. 
+- Create a new page "qr-code-reader.py" that has an QR Code image upload option. Say "Upload from Gallery or Computer".
+- Make the page little colourful, interesting with thin border multi colour and for each section a mild, elegant colour or design
+- Display company logo in the left. Size it correctly. Read the logo from this location "C:\03 PSIPL\psipl-logo.png"
+- If any non-qr code image is uploaded, validate and throw error saying invalid image or say only qr codes are accepted.
+- Once uploaded, read the QR code and display "Product Name", "Model Number" and "Month & Year" of manufacture and indicate if product is under "Warranty" or not. 
+- Check the "Month & Year" , "Warranty", "Registration" from "model-warranty.xlsx"
+- If not registered, prompt user would you like to register the product? If yes then get "Name", "Number", "Address" (optional), "Company Name" (optional), "GST Number" (optional), Upload Invoice copy (image or pdf) (optional) and "Purchased from" (optional).
+- After the above step, say thank you and give following choices:
+(1) How to use? 
+(2) How to clean?
+
+If option 1 selected then share "How to use video". Read the video embed link from "model-warranty.xlsx"
+If option 2 selected then share "How to clean video". Read the video embed link from "model-warranty.xlsx"
+
+Please double check the given logic and generate perfectly working code. Thank you so much!
+ ---
+
+Please make the following changes:
+1. QR Code Data display in plain readable text.
+2. In excel, "Month & Year of Manufacture" replaced with "Mfg Month", "Mfg Year"
+3. Store the "Name", "Number", "Address" (optional), "Company Name" (optional), "GST Number" (optional),  and "Purchased from" (optional) in a excel file  and save to location "C:\01 RVS\01 Personal\04 Learning\08 Streamlit\iBrewQR App\cust-data"
+4. Save Uploaded Invoice copy (image or pdf) (optional) to "C:\01 RVS\01 Personal\04 Learning\08 Streamlit\iBrewQR App\cust-data"
+5. Name both the files in entered "Number" value entered by the user.
+
+"C:/01 RVS/01 Personal/04 Learning/08 Streamlit/iBrewQR App/model-warranty.xlsx"
+-----
+
+Lets back to code changes:
+
+1. Change "QR Code Reader" to PSIPL "After Sale Service" 
+2. "Upload from Gallery or Computer" reduce font size and rename to "Please upload QR Code from Gallery or Computer"
+3. This text "Upload an image" is not required.
+4. This text "Please upload an image to read the QR code." is not required.
+5. Without filling, "Name", "Number", "Address" (optional), "Company Name" (optional), "GST Number" (optional),  and "Purchased from" (optional) fields, if user clicks "Register product" button, validate mandatory fields with a red star or red line around the field.
+6. Upon submit, say thank you and give following choices to select (1) How to use?  (2) How to clean?
+7. If "How to use?' selected, show "How to use video". Link to be taken from "model-warranty.xlsx" based on "Model Number"
+8. If "How to clean?" selected, show "How to clean video". Link to be taken from "model-warranty.xlsx" based on "Model Number"
+---------
+
+Good day to you! Lets make some changes please...
+
+1. Please hide "Loaded warranty data:" table.
+2. When "How to use?", "How to clean?" is clicked nothing happens now. It should load the video based on the embed code defined in "model-warranty.xlsx" for selected "Model Number" in the same page.
+3. st.subheader(":blue[_Please upload QR Code from Gallery or Computer_]", divider='rainbow') - made this changes. update it line number 104.
+4. Move the logo from left to page center top.
+
+Made following changes. Please update it.
+(1)
+Line 112 -  st.subheader(":blue[_Your Warranty Details:_]", divider='rainbow')
+Moved this to line 96 st.image("C:/03 PSIPL/psipl-logo.png", width=150)
+Line 123 - st.subheader(":blue[_Please register your product to avail warranty services._]", divider = 'rainbow')
+
+(2) 
+Video link in "model-warranty.xlsx" is in the following format:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/th9OmWz60sA?si=JDB2We-DVvGs1XY4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+Can we display respective link when option "How to use?" or "How to clean?"  is selected?
+Additionally info: "How to use?", "How to clean?" are defined in  "model-warranty.xlsx" as column headers. When any of the "How to..." options are selected, video embed links defined in excel to be shown in the page in a nice compact way.
+
+1. Please remember, video to be displayed in the same page upon selection of the option.
+2. "model-warranty.xlsx" - has iframe html code. Inside that video url is there. In the same page, user will play the video and see.
+
+
+
+If option 3 selected then show following options and then based on selection their respective videos.
+
+Change heating element 
+Change milk tap
+Change water tap
+Change power cord 
+Change thermostat 
+Change thermal protector
+Change LED indicators
+Change level indicator
+Change milk insert washer
+
+"brand": Pradeep
+
+"model": ML2404515943
+
+"product": Pasteurizer
+
+"voltage": 230-240V
+
+"power": 3000W
+
+"frequency": 50/60Hz
+
+"capacity": 5 Litre
+
+"company": Pradeep Stainless India Pvt Ltd
+
+"address": Plot C-3, Phase II, MEPZ-Special Economic Zone, Chennai - 600 045, India
+
+"phone": +91 44 22623050/51/52
+
+"compliance": Produced as per EN 60335-2-15
+
+"country": Made in India
+
+
+---------------------------------------------------------------------------------------------------------------------------
+05.06.24
+I am planning to building a after sale support app using python and streamlit.
+I will give more details.
+First step, i want User to click a button on the page and it should open camera to scan a QR code and it should read the data from QR code
+display the QR code values in screen. Possible?
+
+---------------------------------------------------------------------------------------------------------------------------
+10.06
+
+lets revise the requirements of this app. please work with me. this app will be used by a kitchen equipment manufacturing company. two types of users (1) customers (2) backend crm team. 
+
+Customers will use "qr-reader.py" page which is also called as "After Sale Support Page". no login required. link will be directly opened by the customers.
+
+CRM team will use 
+
+
+
